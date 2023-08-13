@@ -28,16 +28,35 @@ const Page = async ({ params }: { params: { id: string } }) => {
           author={thread.author}
           community={thread.community}
           createdAt={thread.createdAt}
-          comments={thread.comments}
+          comments={thread.children}
         />
       </div>
 
-      <div className="mt-7">
+      <div className="mt-2">
         <Comment
           threadId={thread.id}
-          currentUserImage={user.imageUrl}
+          currentUserImage={userInfo.image}
           currentUserId={JSON.stringify(userInfo._id)}
         />
+      </div>
+
+      <div className="mt-2">
+        {thread.children.map((childItem: any) => {
+          return (
+            <ThreadCard
+              key={childItem._id}
+              id={childItem._id}
+              currentUserId={user?.id || ""}
+              parentId={childItem.parentId}
+              content={childItem.text}
+              author={childItem.author}
+              community={childItem.community}
+              createdAt={childItem.createdAt}
+              comments={childItem.children}
+              isComment={true}
+            />
+          );
+        })}
       </div>
     </section>
   );

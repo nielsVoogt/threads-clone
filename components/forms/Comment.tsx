@@ -55,7 +55,6 @@ const Comment = ({
 
   return (
     <div>
-      <h1>comment</h1>
       <Form {...form}>
         <form className="comment-form" onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
